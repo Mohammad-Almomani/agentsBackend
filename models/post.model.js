@@ -16,6 +16,10 @@ const Post = (sequelize, DataTypes) =>
     imgURL: {
       type: DataTypes.STRING,
     },
+    category: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: ["Other"],
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,

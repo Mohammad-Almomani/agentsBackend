@@ -11,7 +11,8 @@ const {
   login,
   deleteUser,
   getUser,
-  getProfile
+  getProfile,
+  updateCart
 } = require("../controllers/userController");
 const bearerCheck = require("../middlewares/bearer-auth");
 
@@ -19,6 +20,8 @@ const bearerCheck = require("../middlewares/bearer-auth");
 router.post("/signup", checkUser, signup);
 router.post("/signIn", login);
 router.get("/profile", bearerCheck, getProfile);
+
+router.put("/cartUpdate", bearerCheck, updateCart);
 
 router.get("/user", allUser);
 router.get("/user/:id", getUser);
