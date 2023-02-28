@@ -1,6 +1,6 @@
 "use strict";
 
-const { Users } = require("../models");
+const { Users } = require("../../models");
 /* istanbul ignore next */
 const checkUser = async (req, res, next) => {
   try {

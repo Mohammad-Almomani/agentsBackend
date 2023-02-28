@@ -3,11 +3,11 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const error404 = require("./error-handlers/404");
+const error404 = require("./src/api/error-handlers/404");
 
-const postRouts = require("./routes/post.route");
-const commentRouts = require("./routes/comment.route");
-const userRouts = require("./routes/user.route");
+const postRouts = require("./src/api/routes/post.route");
+const commentRouts = require("./src/api/routes/comment.route");
+const userRouts = require("./src/api/routes/user.route");
 
 app.use(cors());
 app.use(express.json());

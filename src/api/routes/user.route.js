@@ -13,7 +13,7 @@ const {
   getUser,
   getProfile,
   updateCart
-} = require("../controllers/userController");
+} = require("../../actions/controllers/userController");
 const bearerCheck = require("../middlewares/bearer-auth");
 
 // Routes
