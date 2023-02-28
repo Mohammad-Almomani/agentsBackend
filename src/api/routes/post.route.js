@@ -12,8 +12,8 @@ const {
 } = require("../middlewares/acl");
 const bearerCheck = require("../middlewares/bearer-auth");
 
-const { Post, commentModel } = require("../models/index");
-const { imgUpload } = require("../upload/imagesUplaod");
+const { Post, commentModel } = require("../../models/index");
+const { imgUpload } = require("../../actions/upload/imagesUplaod");
 
 // Routes
 router.get("/post", postsWithComments);

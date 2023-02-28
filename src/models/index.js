@@ -5,28 +5,28 @@ const post = require("./post.model");
 const comment = require("./comment.model");
 const user = require("./user.model");
 
-const Collection = require("../collections/user-comment-routes");
+const Collection = require("../actions/collections/user-comment-routes");
 
 const POSTGRES_URL =
   process.env.DATABASE_URL ||
   "postgresql://postgres:1312@localhost:5432/postgres";
 
-const sequelizeOption = {
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-    },
-  },
-};
+// const sequelizeOption = {
+//   dialectOptions: {
+//     ssl: {
+//       require: true,
+//       rejectUnauthorized: false,
+//     },
+//   },
+// };
 
-const sequelize = new Sequelize(POSTGRES_URL, sequelizeOption);
+const sequelize = new Sequelize(POSTGRES_URL /*, sequelizeOption*/);
 const postModel = post(sequelize, DataTypes);
 const commentModel = comment(sequelize, DataTypes);
 const userModel = user(sequelize, DataTypes);
 
 // Relations:
-// Post has many Comments, Comment belongs to Post.
+// Item has many Comments, Comment belongs to one Item.
 // note that the foreign key for the one-to-many relation will be added to the target model
 // sourceKey: "id" is the primary key of the source model
 

@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const error500 = require("../error-handlers/500");
 
-const { Comment } = require("../models/index");
+const { Comment, Post, commentModel } = require("../../models/index");
 
 // Routes
 router.get("/comment", getComments);
@@ -43,7 +43,8 @@ async function createComment(req, res) {
   const comment = await Comment.create(newComment);
   console.log("here check", comment);
   const postComments = await Comment.readComments(comment.id);
-  return res.status(201).json(postComments);
+  const post = await Post.readWithComments(commentModel ,comment.postID);
+  return res.status(201).json(post);
 }
 
 /* istanbul ignore next */

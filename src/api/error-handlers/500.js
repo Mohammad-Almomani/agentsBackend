@@ -1,6 +1,6 @@
 "use strict";
 
-const { Post, Comment, Users, commentModel } = require("../models/index");
+const { Post, Comment, Users, commentModel } = require("../../models/index");
 
 /*eslint-disable no-unused-vars*/
 module.exports = async (req, res, next) => {

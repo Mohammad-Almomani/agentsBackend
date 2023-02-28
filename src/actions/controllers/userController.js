@@ -2,7 +2,7 @@
 const bcrypt = require("bcrypt");
 const base64 = require("base-64");
 
-const { Users, commentModel } = require("../models/index");
+const { Users, commentModel } = require("../../models/index");
 
 // create a new user
 const signup = async (req, res) => {
