@@ -4,6 +4,7 @@ const base64 = require("base-64");
 
 const { Users, commentModel } = require("../models/index");
 
+// create a new user
 const signup = async (req, res) => {
   try {
     const { username, email, password, role } = req.body;
@@ -20,8 +21,11 @@ const signup = async (req, res) => {
   }
 };
 
+// login user, check if user exists, check if password is correct
+
 const login = async (req, res) => {
   try {
+    // check if the user sent the authorization header
     if (!req.headers.authorization) return res.status(401).send("Bad Request");
     console.log(req.headers.authorization);
     const encodedHeader = req.headers.authorization.split(" ").pop();
@@ -43,6 +47,7 @@ const login = async (req, res) => {
     }
 
     if (user) {
+      // check if the password is correct
       const isAuthorized = await bcrypt.compare(password, user.password);
 
       if (isAuthorized) {
@@ -61,11 +66,13 @@ const login = async (req, res) => {
 };
 
 
+// get all users, for testing only
 const allUser = async (req, res) => {
   const users = await Users.findAll({ include: [commentModel] });
   return res.json(users);
 };
 
+// get one user, for testing only
 const getUser = async (req, res) => {
   const id = req.params.id;
   const user = await Users.findOne({
@@ -74,13 +81,15 @@ const getUser = async (req, res) => {
   });
   return res.status(200).json(user);
 };
+
+// delete user, for testing only
 const deleteUser = async (req, res) => {
   const { id } = req.params;
   await Users.destroy({ where: { id: id } });
   return res.status(204).send("deleted");
 };
 
-
+// get user profile, for refreshing the token
 const getProfile = async (req, res) => {
   console.log(req.url);
   try {
@@ -95,7 +104,7 @@ const getProfile = async (req, res) => {
   }
 };
 
-
+// update user cart, for adding and removing items from cart and favorites
 const updateCart = async (req, res) => {
   try {
     const user = await Users.findOne({

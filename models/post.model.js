@@ -14,7 +14,8 @@ const Post = (sequelize, DataTypes) =>
       type: DataTypes.INTEGER,
     },
     imgURL: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
     },
     category: {
       type: DataTypes.ARRAY(DataTypes.STRING),
