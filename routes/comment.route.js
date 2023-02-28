@@ -12,7 +12,8 @@ router.get("/comment/:postID/:userID", error500, getUserOnPostComments);
 
 router.post("/comment", createComment);
 router.put("/comment/:id", error500, updateComment);
-router.delete("/comment/:id", error500, deleteComment);
+// router.delete("/comment/:id", error500, deleteComment);
+router.delete("/comment/:id", deleteComment);
 
 async function getComments(req, res) {
   let allComments = await Comment.read();
@@ -55,9 +56,13 @@ async function updateComment(req, res) {
 }
 /* istanbul ignore next */
 async function deleteComment(req, res) {
-  const id = req.params.id;
-  await Comment.delete(id);
-  return res.status(204).send("Post deleted successfully");
+  try {
+    const id = req.params.id;
+    await Comment.delete(id);
+    return res.status(204).send("Comment deleted successfully");
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
 }
 
 module.exports = router;
