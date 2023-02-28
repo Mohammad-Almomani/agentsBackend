@@ -15,6 +15,9 @@ app.use(postRouts);
 app.use(commentRouts);
 app.use(userRouts);
 
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static("images/items"));
+
 app.get("/", (req, res) => {
   res.status(200).send("Hello World");
 });
