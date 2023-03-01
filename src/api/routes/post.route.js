@@ -13,7 +13,7 @@ const {
 const bearerCheck = require("../middlewares/bearer-auth");
 
 const { Post, commentModel } = require("../../models/index");
-const { imgUpload } = require("../../actions/upload/imagesUplaod");
+const { imgUpload } = require("../../../upload/imagesUplaod");
 
 // Routes
 router.get("/post", postsWithComments);
@@ -38,17 +38,23 @@ async function createPost(req, res) {
 }
 
 async function updatePost(req, res) {
-  if (req.files) {
-    req.body.imgURL = await req.files.map(
-      (file) => `${process.env.BACKEND_URL}/${file.filename}`
-    );
+  console.log(req.body, "check before update")
+  if(req.body.imgUpdate) {
+    if (req.files) {
+      req.body.imgURL = await req.files.map(
+        (file) => `${process.env.BACKEND_URL}/${file.filename}`
+      );
+    }
+    delete req.body.imgUpdate
   }
-  try {
+  console.log(req.body, "check after update")
+
+  // try {
     req.body.category = JSON.parse(req.body.category)
     
-  } catch (error) {
-    console.log(error)
-  }
+  // } catch (error) {
+  //   console.log(error)
+  // }
   const id = req.params.id;
   const obj = req.body;
 

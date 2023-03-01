@@ -3,7 +3,7 @@
 const multer = require("multer");
 const path = require("path");
 const uuid = require("uuid").v4;
-multer.diskStorage ({destination: "../../../images/items/"})
+multer.diskStorage ({destination: "images/items/"})
 
 
 const storage = multer.diskStorage({
