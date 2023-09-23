@@ -16,15 +16,15 @@ const checkUser = async (req, res, next) => {
     }
 
     // Search for the username in the Database
-    const username = await Users.findOne({
-      where: {
-        username: req.body.username,
-      },
-    });
+    // const username = await Users.findOne({
+    //   where: {
+    //     username: req.body.username,
+    //   },
+    // });
 
-    if (username) {
-      return res.status(409).send("Username already taken");
-    }
+    // if (username) {
+    //   return res.status(409).send("Username already taken");
+    // }
 
     next();
   } catch (e) {

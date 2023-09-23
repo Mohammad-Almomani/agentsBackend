@@ -8,12 +8,14 @@ const error404 = require("./src/api/error-handlers/404");
 const postRouts = require("./src/api/routes/post.route");
 const commentRouts = require("./src/api/routes/comment.route");
 const userRouts = require("./src/api/routes/user.route");
+const orderRouts = require("./src/api/routes/order.route");
 
 app.use(cors());
 app.use(express.json());
 app.use(postRouts);
 app.use(commentRouts);
 app.use(userRouts);
+app.use(orderRouts);
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static("images/items"));

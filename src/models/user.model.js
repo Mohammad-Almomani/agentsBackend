@@ -17,12 +17,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    phonenumber: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     favorite: {
       type: DataTypes.ARRAY(DataTypes.INTEGER),
       defaultValue: [],
     },
     cart: {
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
+      type: DataTypes.ARRAY(DataTypes.JSON),
       defaultValue: [],
     },
     token: {

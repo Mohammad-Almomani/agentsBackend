@@ -4,6 +4,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 const post = require("./post.model");
 const comment = require("./comment.model");
 const user = require("./user.model");
+const order = require("./order.model");
 
 const Collection = require("../actions/collections/user-comment-routes");
 
@@ -24,6 +25,7 @@ const sequelize = new Sequelize(POSTGRES_URL /*, sequelizeOption*/);
 const postModel = post(sequelize, DataTypes);
 const commentModel = comment(sequelize, DataTypes);
 const userModel = user(sequelize, DataTypes);
+const orderModel = order(sequelize, DataTypes);
 
 // Relations:
 // Item has many Comments, Comment belongs to one Item.
@@ -39,6 +41,9 @@ commentModel.belongsTo(userModel, { foreignKey: "userID", targetKey: "id" });
 userModel.hasMany(postModel, { foreignKey: "userID", sourceKey: "id" });
 postModel.belongsTo(userModel, { foreignKey: "userID", targetKey: "id" });
 
+userModel.hasMany(orderModel, { foreignKey: "userID", sourceKey: "id" });
+orderModel.belongsTo(userModel, { foreignKey: "userID", targetKey: "id" });
+
 const postCollection = new Collection(postModel);
 const commentsCollection = new Collection(commentModel);
 
@@ -48,4 +53,5 @@ module.exports = {
   Comment: commentsCollection,
   commentModel: commentModel,
   Users: userModel,
+  Order: orderModel,
 };

@@ -17,7 +17,7 @@ const { imgUpload } = require("../../../upload/imagesUplaod");
 
 // Routes
 router.get("/post", postsWithComments);
-router.get("/post/:id", error500,bearerCheck, checkGetOnePost, onePostWithComments);
+router.get("/post/:id", error500, onePostWithComments);
 
 router.post("/post", imgUpload.array("imgURL", 1), bearerCheck, checkCreatePost, createPost);
 router.put("/post/:id", imgUpload.array("imgURL", 1), error500, bearerCheck, checkUpdatePost, updatePost);

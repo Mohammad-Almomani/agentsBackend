@@ -7,12 +7,13 @@ const { Users, commentModel } = require("../../models/index");
 // create a new user
 const signup = async (req, res) => {
   try {
-    const { username, email, password, role } = req.body;
+    const { username, email, password, role, phonenumber } = req.body;
     const data = {
       username: username,
       email: email,
       password: await bcrypt.hash(password, 10),
       role: role,
+      phonenumber: phonenumber,
     };
     const newUser = await Users.create(data);
     res.status(201).json(newUser);
@@ -38,13 +39,13 @@ const login = async (req, res) => {
       },
     });
 
-    if (!user) {
-      user = await Users.findOne({
-        where: {
-          username: email,
-        },
-      });
-    }
+    // if (!user) {
+    //   user = await Users.findOne({
+    //     where: {
+    //       username: email,
+    //     },
+    //   });
+    // }
 
     if (user) {
       // check if the password is correct
