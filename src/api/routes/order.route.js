@@ -15,6 +15,9 @@ router.post("/order", createOrder);
 // router.delete("/comment/:id", error500, deleteComment);
 router.delete("/order/:id", deleteOrder);
 
+// create route to update order status
+router.put("/order/:id", updateOrderStatus);
+
 async function getOrders(req, res) {
     try {
         let Orders = await Order.findAll();
@@ -76,4 +79,11 @@ async function deleteOrder(req, res) {
   }
 }
 
+function updateOrderStatus(req, res) {
+  const id = req.params.id;
+  const obj = req.body;
+
+  const updatedOrder = Order.update(id, obj);
+  return res.status(202).json(updatedOrder);
+}
 module.exports = router;
